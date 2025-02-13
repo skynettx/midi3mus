@@ -302,12 +302,6 @@ void convert_midi(midi_t* m, FILE* outf)
 
 		u32 musclocks = (u32)(eventdelta + error);
 
-		if (musclocks)
-		{
-			if (!writedelta(&trk, musclocks))
-				goto fail;
-			error -= musclocks;
-		}
 		// process event
 		if (1)
 		{
@@ -518,6 +512,13 @@ void convert_midi(midi_t* m, FILE* outf)
 			}
 			if (me_len)
 			{
+				if (musclocks)
+				{
+					if (!writedelta(&trk, musclocks))
+						goto fail;
+					error -= musclocks;
+				}
+				
 				if (!writeevent(&trk, me_data, me_len))
 					goto fail;
 			}
