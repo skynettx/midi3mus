@@ -16,5 +16,7 @@ cd build
 cmake ..
 make
 ```
+## License
+The license can be seen [here](https://github.com/skynettx/midi3mus/blob/master/LICENSE).
 ## Thanks
 All my thanks go to the original author of MIDI3MUS in the forum linked above.
