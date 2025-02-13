@@ -3,13 +3,13 @@ Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
 are met:
 
-    Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-    Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in the
-    documentation and/or other materials provided with the distribution.
-    The name of the author may not be used to endorse or promote products
-    derived from this software without specific prior written permission.
+	Redistributions of source code must retain the above copyright
+	notice, this list of conditions and the following disclaimer.
+	Redistributions in binary form must reproduce the above copyright
+	notice, this list of conditions and the following disclaimer in the
+	documentation and/or other materials provided with the distribution.
+	The name of the author may not be used to endorse or promote products
+	derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
 IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -86,7 +86,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CONTROLLER_1F 31
 // next 32 are LSB of the above
 #define CONTROLLER_LSB_OFFSET 32 // many hardware controls don't set LSB
-                                 // (it's very fine for a human control)
+								 // (it's very fine for a human control)
 
 // binary pedal controls.  0-63 = off, 64-127 = on
 #define CONTROLLER_SUSTAIN 64 // "hold1", aka damper pedal
@@ -166,42 +166,42 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum
 {
-  event_noteoff,
-  event_noteon,
-  event_noteaftertouch,
-  event_controller,
-  event_programchange,
-  event_channelaftertouch,
-  event_pitchbend,
-  event_meta,
-  event_sysex,
-  event_sysex_div
+	event_noteoff,
+	event_noteon,
+	event_noteaftertouch,
+	event_controller,
+	event_programchange,
+	event_channelaftertouch,
+	event_pitchbend,
+	event_meta,
+	event_sysex,
+	event_sysex_div
 } event_type_t;
 
 typedef struct
 {
-  unsigned delta;
-  event_type_t type;
-  int channel;
-  int param1;
-  int param2;
-  unsigned len;
-  u8 *data;
+	unsigned delta;
+	event_type_t type;
+	int channel;
+	int param1;
+	int param2;
+	unsigned len;
+	u8* data;
 } event_t;
 
 typedef struct
 {
-  unsigned numevents;
-  event_t *events;
+	unsigned numevents;
+	event_t* events;
 } track_t;
 
 typedef struct
 {
-  unsigned numtracks;
-  track_t *tracks;
-  int mode; // 0 = single, 1 = alongside, 2 = concatenate
-  int smpte_fps; // 24, 25, 29, 30, or 0
-  int timing; // deltas per frame, or deltas per 'quarter note' if smpte_fps = 0
+	unsigned numtracks;
+	track_t* tracks;
+	int mode; // 0 = single, 1 = alongside, 2 = concatenate
+	int smpte_fps; // 24, 25, 29, 30, or 0
+	int timing; // deltas per frame, or deltas per 'quarter note' if smpte_fps = 0
 } midi_t;
 
 
@@ -209,10 +209,10 @@ typedef struct
 
 
 
-midi_t *parsemidi (const void *data, size_t len);
-void freemidi (midi_t *m);
+midi_t* parsemidi(const void* data, size_t len);
+void freemidi(midi_t* m);
 
-void print_midi_debug (const midi_t *m);
+void print_midi_debug(const midi_t* m);
 
 
 
