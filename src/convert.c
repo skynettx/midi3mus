@@ -367,7 +367,8 @@ void convert_midi(midi_t* m, FILE* outf)
 			case event_controller:
 				switch (currevent->param1)
 				{
-				case CONTROLLER_BANKSELECT + CONTROLLER_LSB_OFFSET:
+				case CONTROLLER_BANKSELECT:
+				case CONTROLLER_LSB_OFFSET:
 					fprintf(stderr, "bank select messages are not well understood\n");
 					me_data[0] = outchannel | 0x40;
 					me_data[1] = 1;
