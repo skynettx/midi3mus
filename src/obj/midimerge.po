@@ -1,0 +1,30 @@
+obj/midimerge.o: midimerge.c midimerge.h parsemidi.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/include/stddef.h ints.h smalloc.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/string.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/_mingw.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/stdlib.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/stdio.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/include/stdarg.h \
+ d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/sys/types.h
+
+midimerge.h:
+
+parsemidi.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/include/stddef.h:
+
+ints.h:
+
+smalloc.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/string.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/_mingw.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/stdlib.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/stdio.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/include/stdarg.h:
+
+d:\mingw\bin\../lib/gcc/mingw32/4.5.2/../../../../include/sys/types.h:
