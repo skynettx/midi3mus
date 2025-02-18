@@ -23,13 +23,16 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "parsemidi.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#include "parsemidi.h"
 #include "midimerge.h"
 #include "convert.h"
 #include "smalloc.h"
-#include <string.h>
+
 
 
 int main(int argc, char** argv)
