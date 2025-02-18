@@ -44,15 +44,67 @@ int main(int argc, char** argv)
 
 	size_t nread;
 
-	if (argc != 3 && argc != 2)
+	printf("MIDI3MUS\n"
+		"\n");
+
+	if (argc != 5 && argc != 4 && argc != 3 && argc != 2)
 	{
-		fprintf(stderr, "usage: midi3mus infile [outfile]\n");
+		fprintf(stderr, "Usage: midi3mus [-options value] infile [outfile]\n"
+			"  Default action is to convert with a time division of 140 Hz\n"
+			"options:\n"
+			"  -t set time divison\n"
+			"value:\n"
+			"  Set time divison value in Hz\n"
+			"  For example, 140 is correct for games based on the Doom engine and\n"
+			"  70 is the correct value for Raptor: Call of the Shadows\n");
 		return EXIT_FAILURE;
 	}
 
 	if (strcmp(argv[1], "-") == 0)
 	{
 		f = stdin;
+	}
+	else if (strcmp(argv[1], "-t") == 0)
+	{
+		if (argv[2] == NULL)
+		{
+			fprintf(stderr, "time division value not specified\n");
+			return EXIT_FAILURE;
+		}
+
+		if (argv[3] == NULL)
+		{
+			fprintf(stderr, "Inputfile not specified\n");
+			return EXIT_FAILURE;
+		}
+
+		size_t stringlen = strlen(argv[2]);
+
+		for (int i = 0; i < stringlen; i++)
+		{
+			if (!isdigit(argv[2][i]))
+			{
+				fprintf(stderr, "time division value not digit %s\n", argv[2]);
+				return EXIT_FAILURE;
+			}
+		}
+
+		u16 tpsval = atoi(argv[2]);
+
+		if (!tpsval)
+		{
+			fprintf(stderr, "time division value out of range %s\n", argv[2]);
+			return EXIT_FAILURE;
+		}
+
+		set_tps_value(tpsval);
+
+		f = fopen(argv[3], "rb");
+		if (!f)
+		{
+			fprintf(stderr, "failed to load %s\n", argv[3]);
+			return EXIT_FAILURE;
+		}
 	}
 	else
 	{
@@ -103,8 +155,13 @@ int main(int argc, char** argv)
 	}
 	free(buff);
 
-	if (!argv[2])
+	if (!argv[2] || (strcmp(argv[1], "-t") == 0 && !argv[4]))
 	{ // default outfile name
+		if (strcmp(argv[1], "-t") == 0 && !argv[4])
+		{
+			strcpy(argv[1], argv[3]);
+		}
+
 		char* fnameout;
 		int i = strlen(argv[1]);
 		fnameout = smalloc(i + 5);
@@ -130,6 +187,15 @@ int main(int argc, char** argv)
 	else if (strcmp(argv[2], "-") == 0)
 	{
 		f = stdout;
+	}
+	else if (argv[4] && argc == 5)
+	{
+		f = fopen(argv[4], "wb");
+		if (!f)
+		{
+			fprintf(stderr, "failed to write to %s\n", argv[4]);
+			return EXIT_FAILURE;
+		}
 	}
 	else
 	{

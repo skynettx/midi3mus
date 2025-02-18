@@ -34,7 +34,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <string.h>
 
-
+u16 tps = 140;
 
 static double compute_spmc_normal(unsigned mpq, unsigned tempo, unsigned sndrate)
 { // returns samples per midi clock
@@ -231,6 +231,11 @@ static void writeshort(FILE* f, u16 val)
 	fputc(val >> 8, f);
 }
 
+void set_tps_value(u16 val)
+{
+	tps = val;
+}
+
 // in midi should already be mode 0
 void convert_midi(midi_t* m, FILE* outf)
 {
@@ -280,9 +285,9 @@ void convert_midi(midi_t* m, FILE* outf)
 
 	// compute initial tempo
 	if (m->smpte_fps)
-		spmc = compute_spmc_smpte(m->smpte_fps, m->timing, 140);
+		spmc = compute_spmc_smpte(m->smpte_fps, m->timing, tps);
 	else
-		spmc = compute_spmc_normal(m->timing, 500000, 140); // assumed bpm of 120
+		spmc = compute_spmc_normal(m->timing, 500000, tps); // assumed bpm of 120
 
 	error = 0.0;
 	eventnumber = 0;
@@ -490,7 +495,7 @@ void convert_midi(midi_t* m, FILE* outf)
 						(u32)currevent->data[0] << 16 |
 						(u32)currevent->data[1] << 8 |
 						(u32)currevent->data[2],
-						140
+						tps
 					);
 					break;
 				case META_ENDTRACK:
@@ -518,7 +523,7 @@ void convert_midi(midi_t* m, FILE* outf)
 						goto fail;
 					error -= musclocks;
 				}
-				
+
 				if (!writeevent(&trk, me_data, me_len))
 					goto fail;
 			}

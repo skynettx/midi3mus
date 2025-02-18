@@ -28,7 +28,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 void convert_midi(midi_t* m, FILE* fout);
-
+void set_tps_value(u16 val);
 
 
 
